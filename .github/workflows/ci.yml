@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    uses: PANiXiDA-Infrastructure/ci-cd/.github/workflows/dotnet-format.yml@main
+    secrets:
+      registry-user: ${{ github.actor }}
+      registry-token: ${{ secrets.GITHUB_TOKEN }}
+
+  tests:
+    permissions:
+      contents: read
+      checks: write
+    uses: PANiXiDA-Infrastructure/ci-cd/.github/workflows/dotnet-tests.yml@main
+    with:
+      run-analyzers: true
+    secrets:
+      registry-user: ${{ github.actor }}
+      registry-token: ${{ secrets.GITHUB_TOKEN }}
