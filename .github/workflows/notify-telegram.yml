@@ -1,0 +1,21 @@
+name: Telegram notifications
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  notify:
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+    uses: PANiXiDA-Infrastructure/ci-cd/.github/workflows/notify-telegram.yml@main
+    with:
+      event-name: ${{ github.event_name }}
+    secrets:
+      telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      telegram-chat-id: ${{ vars.TELEGRAM_CHAT_ID }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
