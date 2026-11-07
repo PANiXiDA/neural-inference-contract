@@ -43,7 +43,7 @@
 Требуется .NET 10 SDK. Команды выполняются из корня репозитория:
 
 ```powershell
-dotnet build NeuralInferenceContract.sln
+dotnet build NeuralInferenceContract.slnx
 dotnet run --project src/NeuralInferenceContract -- success
 ```
 
@@ -74,10 +74,18 @@ dotnet run --project src/NeuralInferenceContract -- all
 ## Тесты
 
 ```powershell
-dotnet test NeuralInferenceContract.sln
+dotnet test --solution NeuralInferenceContract.slnx
 ```
 
-Тесты проверяют денежный учёт, права участников, квитанции, сроки и повторные события. Отдельная проверка обходит достижимые состояния конфигурации `p=1, U=2` по конечному тестовому алфавиту. Сборка и тесты также запускаются в GitHub Actions при открытии PR и изменениях в `main`.
+Тесты используют xUnit v3 и Microsoft.Testing.Platform. Они проверяют денежный учёт, права участников, квитанции, сроки и повторные события. Отдельная проверка обходит достижимые состояния конфигурации `p=1, U=2` по конечному тестовому алфавиту.
+
+В GitHub Actions при открытии PR и изменениях в `main` запускаются общие workflow проверки форматирования и тестирования из `PANiXiDA-Infrastructure/ci-cd`. Тестовый workflow собирает проект с анализаторами, публикует результаты тестов и отчёт о покрытии. Решение хранится в формате `.slnx`.
+
+Проверка форматирования локально:
+
+```powershell
+dotnet format NeuralInferenceContract.slnx --verify-no-changes --severity warn
+```
 
 ## Дальнейшие этапы
 

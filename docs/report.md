@@ -254,7 +254,7 @@ $$
 
 Базовая модель реализована на C# и .NET 10 [6]. Консольный интерфейс позволяет выбрать один из десяти сценариев, выполнить его и вывести последовательность переходов. Начальная конфигурация командной строки фиксирована: `p = 1`, `U = 2`; модель также принимает другие допустимые параметры через `ContractTerms`.
 
-Модель и исполнение сценариев используют стандартную библиотеку .NET. Для тестирования используется xUnit. Текущая структура:
+Модель и исполнение сценариев используют стандартную библиотеку .NET. Для тестирования используются xUnit v3 и Microsoft.Testing.Platform. Решение хранится в файле `NeuralInferenceContract.slnx`. Текущая структура:
 
 ```text
 src/NeuralInferenceContract/
@@ -322,10 +322,12 @@ tests/NeuralInferenceContract.Tests/
 Команды воспроизведения из корня репозитория:
 
 ```powershell
-dotnet build NeuralInferenceContract.sln --configuration Release
-dotnet test NeuralInferenceContract.sln --configuration Release
+dotnet build NeuralInferenceContract.slnx --configuration Release
+dotnet test --solution NeuralInferenceContract.slnx --configuration Release
 dotnet run --project src/NeuralInferenceContract --configuration Release -- all
 ```
+
+CI использует общие workflow `dotnet-format.yml` и `dotnet-tests.yml` из `PANiXiDA-Infrastructure/ci-cd`. Проверка форматирования выполняется отдельно от тестов. Тестовый workflow собирает проект с анализаторами, запускает тесты через Microsoft.Testing.Platform и формирует отчёты TRX и Cobertura.
 
 ## 11. Дополнительный вероятностный анализ
 
