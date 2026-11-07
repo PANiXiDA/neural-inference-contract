@@ -2,7 +2,7 @@ namespace NeuralInferenceContract.Tests;
 
 public sealed class ConsoleApplicationTests
 {
-    [Theory]
+    [Theory(DisplayName = "Поддерживаемые аргументы выводят результат без ошибок")]
     [InlineData("--help")]
     [InlineData("--list")]
     [InlineData("all")]
@@ -17,7 +17,7 @@ public sealed class ConsoleApplicationTests
         Assert.Empty(error.ToString());
     }
 
-    [Fact]
+    [Fact(DisplayName = "Запуск без аргументов выполняет все сценарии")]
     public void Default_execution_runs_every_scenario_including_unfinished_one()
     {
         using var output = new StringWriter();
@@ -29,7 +29,7 @@ public sealed class ConsoleApplicationTests
         Assert.Empty(error.ToString());
     }
 
-    [Theory]
+    [Theory(DisplayName = "Неизвестный аргумент возвращает ошибку использования")]
     [InlineData("unknown")]
     [InlineData("--price")]
     public void Unknown_argument_returns_usage_error(string argument)
@@ -41,7 +41,7 @@ public sealed class ConsoleApplicationTests
         Assert.Contains("--list", error.ToString());
     }
 
-    [Fact]
+    [Fact(DisplayName = "Лишние аргументы командной строки отклоняются")]
     public void Extra_arguments_are_rejected()
     {
         using var output = new StringWriter();

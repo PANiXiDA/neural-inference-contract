@@ -5,7 +5,7 @@ namespace NeuralInferenceContract.Tests;
 
 public sealed class ScenarioTests
 {
-    [Theory]
+    [Theory(DisplayName = "Сценарий завершается с ожидаемым распределением средств")]
     [InlineData("success", ContractStage.Settled, 0, 1, 1)]
     [InlineData("full-cost", ContractStage.Settled, 0, 2, 0)]
     [InlineData("provider-no-accept", ContractStage.Refunded, 0, 0, 2)]
@@ -29,7 +29,7 @@ public sealed class ScenarioTests
         Assert.Equal(refunded, run.FinalState.UserRefunded);
     }
 
-    [Fact]
+    [Fact(DisplayName = "Успешный сценарий сохраняет переходы и выходы автоматов")]
     public void Successful_scenario_records_each_state_and_moore_mealy_output()
     {
         var terms = new ContractTerms();
@@ -44,7 +44,7 @@ public sealed class ScenarioTests
         Assert.All(run.Steps, step => Assert.True(step.Result.Accepted));
     }
 
-    [Fact]
+    [Fact(DisplayName = "Без инициатора резерв сохраняется после истечения срока")]
     public void Missing_initiator_keeps_funds_reserved_after_deadline()
     {
         var terms = new ContractTerms();

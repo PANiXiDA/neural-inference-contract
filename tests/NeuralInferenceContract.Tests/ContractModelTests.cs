@@ -4,7 +4,7 @@ namespace NeuralInferenceContract.Tests;
 
 public sealed class ContractModelTests
 {
-    [Theory]
+    [Theory(DisplayName = "Подтверждение оплачивает использованные токены и возвращает остаток")]
     [InlineData(1, 2, 1, 1, 1)]
     [InlineData(3, 5, 2, 6, 9)]
     [InlineData(3, 5, 5, 15, 0)]
@@ -26,7 +26,7 @@ public sealed class ContractModelTests
         Assert.Equal(1, state.Output);
     }
 
-    [Theory]
+    [Theory(DisplayName = "Некорректные условия отклоняются до создания состояния")]
     [InlineData(0, 2)]
     [InlineData(-1, 2)]
     [InlineData(1, 0)]
@@ -38,7 +38,7 @@ public sealed class ContractModelTests
         Assert.Throws<ArgumentOutOfRangeException>(() => new ContractTerms(price, limit));
     }
 
-    [Fact]
+    [Fact(DisplayName = "Некорректная квитанция не изменяет состояние и средства")]
     public void Invalid_receipts_leave_funds_and_state_unchanged()
     {
         var state = ModelTestData.AtStage(ContractStage.Processing);
@@ -51,7 +51,7 @@ public sealed class ContractModelTests
         }
     }
 
-    [Theory]
+    [Theory(DisplayName = "Действие доступно только уполномоченной роли")]
     [InlineData(ContractStage.Idle, EventKind.Reserve, ActorRole.User)]
     [InlineData(ContractStage.Reserved, EventKind.Accept, ActorRole.Provider)]
     [InlineData(ContractStage.Processing, EventKind.PublishReceipt, ActorRole.Provider)]
@@ -73,7 +73,7 @@ public sealed class ContractModelTests
         }
     }
 
-    [Theory]
+    [Theory(DisplayName = "Завершение по тайм-ауту требует истечения срока и отдельного вызова")]
     [InlineData(ContractStage.Reserved, ContractStage.Refunded)]
     [InlineData(ContractStage.Processing, ContractStage.Refunded)]
     [InlineData(ContractStage.AwaitingConfirmation, ContractStage.Disputed)]
@@ -102,7 +102,7 @@ public sealed class ContractModelTests
         Assert.Equal(expected == ContractStage.Refunded ? 2 : 0, completed.UserRefunded);
     }
 
-    [Theory]
+    [Theory(DisplayName = "Действия этапа отклоняются при достигнутом сроке")]
     [InlineData(ContractStage.Reserved, EventKind.Accept, ActorRole.Provider)]
     [InlineData(ContractStage.Processing, EventKind.PublishReceipt, ActorRole.Provider)]
     [InlineData(ContractStage.AwaitingConfirmation, EventKind.Confirm, ActorRole.User)]
@@ -119,7 +119,7 @@ public sealed class ContractModelTests
         Assert.Same(state, result.State);
     }
 
-    [Fact]
+    [Fact(DisplayName = "Спор по тайм-ауту получает новый срок арбитража")]
     public void Dispute_opened_by_timeout_has_its_own_deadline()
     {
         var dispute = ModelTestData.ApplyAccepted(ModelTestData.AtStage(ContractStage.AwaitingConfirmation),
@@ -136,7 +136,7 @@ public sealed class ContractModelTests
         Assert.Equal(0, refunded.Escrow);
     }
 
-    [Theory]
+    [Theory(DisplayName = "Любой участник может инициировать возврат после истечения срока")]
     [InlineData(ActorRole.User)]
     [InlineData(ActorRole.Provider)]
     [InlineData(ActorRole.Arbiter)]
@@ -150,7 +150,7 @@ public sealed class ContractModelTests
         Assert.Equal(2, state.UserRefunded);
     }
 
-    [Theory]
+    [Theory(DisplayName = "Источник времени и неизвестная роль не могут инициировать возврат")]
     [InlineData(ActorRole.None)]
     [InlineData(ActorRole.Clock)]
     public void Nonparticipant_cannot_claim_timeout(ActorRole actor)
@@ -160,7 +160,7 @@ public sealed class ContractModelTests
         Assert.False(ContractModel.Apply(state, new(EventKind.ClaimTimeout, actor)).Accepted);
     }
 
-    [Theory]
+    [Theory(DisplayName = "Решение по другой квитанции отклоняется")]
     [InlineData(ContractStage.AwaitingConfirmation, EventKind.Confirm, ActorRole.User)]
     [InlineData(ContractStage.AwaitingConfirmation, EventKind.OpenDispute, ActorRole.User)]
     [InlineData(ContractStage.Disputed, EventKind.ResolvePay, ActorRole.Arbiter)]
@@ -173,7 +173,7 @@ public sealed class ContractModelTests
         Assert.Same(state, result.State);
     }
 
-    [Fact]
+    [Fact(DisplayName = "Достижимые переходы сохраняют денежные инварианты")]
     public void Finite_configuration_preserves_invariants_for_all_reachable_transitions()
     {
         var alphabet = ModelTestData.FiniteAlphabet();
