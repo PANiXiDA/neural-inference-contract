@@ -22,7 +22,6 @@ public static class ContractModel
             return Accept(state, "Ожидание.");
         }
 
-        // Терминальные состояния поглощающие: повторы не меняют расчёты.
         if (state.IsFinal)
         {
             return Reject(state, "Расчёты уже завершены.");
@@ -99,7 +98,6 @@ public static class ContractModel
             return Reject(state, "Квитанция не прошла проверку соответствия или подписи.");
         }
 
-        // После проверки диапазона произведение ограничено проверенным резервом.
         if (receipt.UsedTokens < 1 || receipt.UsedTokens > state.Terms.MaxTokens
             || receipt.Cost != checked(receipt.UsedTokens * state.Terms.PricePerToken))
         {
@@ -116,7 +114,6 @@ public static class ContractModel
             return Reject(state, "Срок текущего этапа ещё не истёк.");
         }
 
-        // Тайм-аут подтверждения открывает спор с новым сроком.
         return state.Stage switch
         {
             ContractStage.AwaitingConfirmation =>

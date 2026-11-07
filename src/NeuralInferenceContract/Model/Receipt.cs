@@ -1,6 +1,5 @@
 namespace NeuralInferenceContract.Model;
 
-// Признаки соответствия заменяют строки, хеши и проверку подписи в конечной модели.
 public sealed record Receipt(
     long UsedTokens,
     long Cost,

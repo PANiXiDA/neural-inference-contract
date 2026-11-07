@@ -13,7 +13,6 @@ public enum ContractStage
 
 public sealed record ContractState
 {
-    // Создание следующих состояний доступно только коду модели переходов.
     internal ContractState(
         ContractTerms terms,
         ContractStage stage,

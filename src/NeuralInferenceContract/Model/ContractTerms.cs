@@ -7,7 +7,6 @@ public sealed record ContractTerms
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(pricePerToken);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(maxTokens);
 
-        // Проверка до умножения гарантирует, что резерв помещается в целое число.
         if (maxTokens > long.MaxValue / pricePerToken)
         {
             throw new ArgumentOutOfRangeException(nameof(maxTokens), "Стоимость резерва превышает Int64.");

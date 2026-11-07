@@ -182,7 +182,6 @@ public sealed class ContractModelTests
         var pending = new Queue<ContractState>();
         pending.Enqueue(initial);
 
-        // Обход проверяет не только готовые сценарии, но и их возможные перестановки.
         while (pending.TryDequeue(out var state))
         {
             foreach (var input in alphabet)
