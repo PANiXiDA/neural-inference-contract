@@ -1,3 +1,4 @@
+using NeuralInferenceContract.Automata;
 using NeuralInferenceContract.Model;
 
 namespace NeuralInferenceContract.Scenarios;
@@ -7,17 +8,18 @@ public static class ScenarioRunner
     public static ScenarioRun Run(ContractScenario scenario, ContractTerms terms)
     {
         ArgumentNullException.ThrowIfNull(scenario);
-        var initial = ContractState.Create(terms);
-        var state = initial;
+        var environment = EnvironmentAutomaton.FromEvents(scenario.Events);
+        var composition = new ContractComposition(environment, terms);
+        var state = composition.InitialState;
         var steps = new List<ScenarioStep>();
 
-        foreach (var input in scenario.Events)
+        for (var index = 0; index < scenario.Events.Count; index++)
         {
-            var result = ContractModel.Apply(state, input);
-            steps.Add(new ScenarioStep(steps.Count + 1, input, state, result));
-            state = result.State;
+            var step = composition.Step(state);
+            steps.Add(new ScenarioStep(index + 1, step.Event, state.Contract, step.Result));
+            state = step.NextState;
         }
 
-        return new ScenarioRun(initial, steps.AsReadOnly());
+        return new ScenarioRun(composition.InitialState.Contract, steps.AsReadOnly());
     }
 }
