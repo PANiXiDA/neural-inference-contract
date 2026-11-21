@@ -10,6 +10,23 @@ public static class ConsoleApplication
 {
     public static int Run(string[] args, TextWriter output, TextWriter error)
     {
+        if (args.Length > 0 && args[0].Equals("--contract-graph", StringComparison.OrdinalIgnoreCase))
+        {
+            if (args.Length == 1)
+            {
+                output.Write(ContractGraphExport.Mermaid());
+                return 0;
+            }
+            if (args.Length == 2 && args[1].Equals("dot", StringComparison.OrdinalIgnoreCase))
+            {
+                output.Write(ContractGraphExport.Dot());
+                return 0;
+            }
+
+            WriteUsage(error);
+            return 2;
+        }
+
         if (args.Length > 0 && args[0].Equals("--probability", StringComparison.OrdinalIgnoreCase))
         {
             return AnalyzeProbability(args, output, error);
@@ -188,6 +205,7 @@ public static class ConsoleApplication
     {
         output.WriteLine("Использование: NeuralInferenceContract [all | имя-сценария | --list | --help]");
         output.WriteLine("Анализ сплетения: NeuralInferenceContract --analyze имя-сценария [каталог экспорта]");
+        output.WriteLine("Граф контракта в Mermaid или DOT: NeuralInferenceContract --contract-graph [dot]");
         output.WriteLine("Вероятностный анализ: NeuralInferenceContract --probability [каталог экспорта]");
         output.WriteLine("Без аргументов выполняются все сценарии. Начальная конфигурация: p=1, U=2.");
     }
