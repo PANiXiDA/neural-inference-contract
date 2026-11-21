@@ -1,0 +1,71 @@
+<svg viewBox="0 0 1200 758" role="img" aria-labelledby="title description" xmlns="http://www.w3.org/2000/svg">
+  <title id="title">Дендрограмма вероятностной среды</title>
+  <desc id="description">Двоичные пути к оплате, возврату и замкнутым компонентам с заблокированными средствами.</desc>
+  <rect width="100%" height="100%" fill="white" />
+  <text x="28" y="36" font-family="Arial, sans-serif" font-size="23" text-anchor="start" fill="#0f172a">Дендрограмма вероятностной среды</text>
+  <text x="28" y="62" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#0f172a">0 — действие не выполнено; 1 — выполнено. В листьях указаны вероятность пути и остаток резерва B.</text>
+  <polyline points="140,372 170,372 170,162 200,162" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="180" y="155" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">0</text>
+  <polyline points="140,372 170,372 170,456 200,456" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="180" y="449" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">1</text>
+  <polyline points="320,162 350,162 350,120 950,120" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="360" y="113" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">0</text>
+  <polyline points="320,162 350,162 350,204 950,204" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="360" y="197" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">1</text>
+  <polyline points="320,456 350,456 350,414 380,414" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="360" y="407" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">0</text>
+  <polyline points="320,456 350,456 350,624 950,624" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="360" y="617" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">1</text>
+  <polyline points="500,414 530,414 530,288 950,288" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="540" y="281" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">0</text>
+  <polyline points="500,414 530,414 530,456 560,456" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="540" y="449" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">1</text>
+  <polyline points="680,456 710,456 710,414 740,414" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="720" y="407" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">0</text>
+  <polyline points="680,456 710,456 710,540 950,540" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="720" y="533" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">1</text>
+  <polyline points="860,414 890,414 890,372 950,372" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="900" y="365" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">0</text>
+  <polyline points="860,414 890,414 890,456 950,456" fill="none" stroke="#94a3b8" stroke-width="2" />
+  <text x="900" y="449" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">1</text>
+  <rect x="20" y="346" width="120" height="52" rx="7" fill="#f8fafc" stroke="#64748b" />
+  <text x="80" y="367" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0f172a">Результат провайдера</text>
+  <text x="80" y="387" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">P(1) = 0.5</text>
+  <rect x="200" y="136" width="120" height="52" rx="7" fill="#f8fafc" stroke="#64748b" />
+  <text x="260" y="157" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0f172a">Инициатор возврата</text>
+  <text x="260" y="177" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">P(1) = 0.5</text>
+  <rect x="200" y="430" width="120" height="52" rx="7" fill="#f8fafc" stroke="#64748b" />
+  <text x="260" y="451" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0f172a">Подтверждение</text>
+  <text x="260" y="471" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">P(1) = 0.5</text>
+  <rect x="380" y="388" width="120" height="52" rx="7" fill="#f8fafc" stroke="#64748b" />
+  <text x="440" y="409" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0f172a">Инициатор спора</text>
+  <text x="440" y="429" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">P(1) = 0.5</text>
+  <rect x="560" y="430" width="120" height="52" rx="7" fill="#f8fafc" stroke="#64748b" />
+  <text x="620" y="451" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0f172a">Решение арбитра</text>
+  <text x="620" y="471" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">P(1) = 0.5</text>
+  <rect x="740" y="388" width="120" height="52" rx="7" fill="#f8fafc" stroke="#64748b" />
+  <text x="800" y="409" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0f172a">Инициатор возврата</text>
+  <text x="800" y="429" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">P(1) = 0.5</text>
+  <rect x="950" y="94" width="220" height="52" rx="7" fill="#fee2e2" stroke="#b91c1c" />
+  <text x="1060" y="115" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#0f172a">00 · блокировка</text>
+  <text x="1060" y="135" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">P = 0.25; B = 2</text>
+  <rect x="950" y="178" width="220" height="52" rx="7" fill="#dbeafe" stroke="#1d4ed8" />
+  <text x="1060" y="199" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#0f172a">01 · возврат</text>
+  <text x="1060" y="219" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">P = 0.25; B = 0</text>
+  <rect x="950" y="262" width="220" height="52" rx="7" fill="#fee2e2" stroke="#b91c1c" />
+  <text x="1060" y="283" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#0f172a">100 · блокировка</text>
+  <text x="1060" y="303" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">P = 0.125; B = 2</text>
+  <rect x="950" y="346" width="220" height="52" rx="7" fill="#fee2e2" stroke="#b91c1c" />
+  <text x="1060" y="367" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#0f172a">10100 · блокировка</text>
+  <text x="1060" y="387" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">P = 0.03125; B = 2</text>
+  <rect x="950" y="430" width="220" height="52" rx="7" fill="#dbeafe" stroke="#1d4ed8" />
+  <text x="1060" y="451" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#0f172a">10101 · возврат</text>
+  <text x="1060" y="471" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">P = 0.03125; B = 0</text>
+  <rect x="950" y="514" width="220" height="52" rx="7" fill="#dcfce7" stroke="#15803d" />
+  <text x="1060" y="535" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#0f172a">1011 · оплата</text>
+  <text x="1060" y="555" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">P = 0.0625; B = 0</text>
+  <rect x="950" y="598" width="220" height="52" rx="7" fill="#dcfce7" stroke="#15803d" />
+  <text x="1060" y="619" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#0f172a">11 · оплата</text>
+  <text x="1060" y="639" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f172a">P = 0.25; B = 0</text>
+  <text x="28" y="730" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#0f172a">Отсутствие инициатора означает постоянное ожидание Wait на соответствующем этапе.</text>
+</svg>
