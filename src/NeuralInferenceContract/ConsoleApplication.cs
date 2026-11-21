@@ -10,6 +10,11 @@ public static class ConsoleApplication
 {
     public static int Run(string[] args, TextWriter output, TextWriter error)
     {
+        if (args.Length > 0 && args[0].Equals("--probability", StringComparison.OrdinalIgnoreCase))
+        {
+            return AnalyzeProbability(args, output, error);
+        }
+
         if (args.Length > 0 && args[0].Equals("--analyze", StringComparison.OrdinalIgnoreCase))
         {
             return Analyze(args, output, error);
@@ -108,6 +113,51 @@ public static class ConsoleApplication
         return 0;
     }
 
+    private static int AnalyzeProbability(string[] args, TextWriter output, TextWriter error)
+    {
+        if (args.Length > 2)
+        {
+            WriteUsage(error);
+            return 2;
+        }
+
+        var terms = new ContractTerms();
+        var analysis = ProbabilityAnalysis.Build(terms);
+        if (args.Length == 2)
+        {
+            try
+            {
+                ProbabilityExport.Write(args[1], analysis);
+            }
+            catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or ArgumentException)
+            {
+                error.WriteLine($"Ошибка экспорта: {exception.Message}");
+                return 1;
+            }
+        }
+
+        output.WriteLine("Вероятностная среда: независимые равновероятные двоичные решения.");
+        foreach (var path in analysis.Paths)
+        {
+            output.WriteLine(FormattableString.Invariant(
+                $"{path.Environment.Code}: P={path.Environment.Probability}; {path.Outcome}; резерв={path.EntryState.Escrow}."));
+        }
+
+        output.WriteLine(FormattableString.Invariant(
+            $"Оплата: {analysis.SettledProbability}; возврат: {analysis.RefundedProbability}; блокировка: {analysis.LockedProbability}."));
+        output.WriteLine(FormattableString.Invariant(
+            $"Сумма вероятностей: {analysis.TotalProbability}; средний заблокированный резерв: {analysis.ExpectedEscrow}."));
+        output.WriteLine("Влияние вероятности участия инициатора (остальные вероятности равны 0.5):");
+        foreach (var probability in new[] { 0m, 0.5m, 1m })
+        {
+            var comparison = ProbabilityAnalysis.Build(terms, new EnvironmentProbabilities(timeoutInitiator: probability));
+            output.WriteLine(FormattableString.Invariant(
+                $"a={probability}: оплата={comparison.SettledProbability}; возврат={comparison.RefundedProbability}; блокировка={comparison.LockedProbability}."));
+        }
+
+        return 0;
+    }
+
     private static void WriteScenario(TextWriter output, ContractScenario scenario, ScenarioRun run)
     {
         output.WriteLine();
@@ -138,6 +188,7 @@ public static class ConsoleApplication
     {
         output.WriteLine("Использование: NeuralInferenceContract [all | имя-сценария | --list | --help]");
         output.WriteLine("Анализ сплетения: NeuralInferenceContract --analyze имя-сценария [каталог экспорта]");
+        output.WriteLine("Вероятностный анализ: NeuralInferenceContract --probability [каталог экспорта]");
         output.WriteLine("Без аргументов выполняются все сценарии. Начальная конфигурация: p=1, U=2.");
     }
 }
